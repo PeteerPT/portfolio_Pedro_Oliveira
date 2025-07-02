@@ -1,0 +1,45 @@
+# Dependências
+node_modules/
+
+# Builds
+build/
+dist/
+.out/
+.next/
+.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Variáveis de ambiente
+.env
+.env.*.local
+
+# Cache do npm/yarn
+.npm
+.eslintcache
+.stylelintcache
+
+# Testes e coverage
+coverage/
+.jest/
+test-results/
+playwright-report/
+
+# IDEs e sistema operacional
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*.log
+*.tmp
+*.temp
+*.bak
+
+# Outras pastas automáticas e de dependências
+bower_components/
+jspm_packages/

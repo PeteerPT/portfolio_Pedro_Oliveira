@@ -1,0 +1,286 @@
+.audio-control-container {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  z-index: 9999;
+  pointer-events: none;
+  font-family: 'MS Sans Serif', sans-serif;
+  
+  /* 🎯 Inicialmente invisível e fora da tela */
+  opacity: 0;
+  transform: translateX(-120px) scale(0.8);
+  transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 🎯 Estado visível com animação suave */
+.audio-control-container.visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+}
+
+.audio-control-panel {
+  background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 50%, #a8a8a8 100%);
+  border: 1px solid #808080;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 
+    2px 2px 6px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.7);
+  user-select: none;
+  backdrop-filter: blur(2px);
+  transition: all 0.2s ease;
+  min-width: 140px;
+}
+
+.audio-control-panel:hover {
+  background: linear-gradient(135deg, #f0f0f0 0%, #d4d0c8 50%, #b8b8b8 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    3px 3px 8px rgba(0, 0, 0, 0.4),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.audio-button {
+  background: linear-gradient(135deg, #f0f0f0 0%, #d0d0d0 50%, #b0b0b0 100%);
+  border: 1px solid #808080;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: all 0.15s ease;
+  user-select: none;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ✨ BRILHO SUTIL no hover do botão */
+.audio-button:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 8px rgba(255, 255, 255, 0.6); /* ✨ Brilho suave */
+}
+
+.audio-button:active {
+  transform: translateY(1px);
+  background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 50%, #808080 100%);
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.audio-button.muted {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 50%, #dc3545 100%);
+  border: 1px solid #dc3545;
+  border-top: 1px solid #ff8a80;
+  border-left: 1px solid #ff8a80;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  animation: mutePulse 2s ease-in-out infinite;
+}
+
+@keyframes mutePulse {
+  0%, 100% { 
+    box-shadow: 
+      2px 2px 6px rgba(0, 0, 0, 0.3),
+      0 0 0 0 rgba(220, 53, 69, 0.4);
+  }
+  50% { 
+    box-shadow: 
+      2px 2px 6px rgba(0, 0, 0, 0.3),
+      0 0 0 4px rgba(220, 53, 69, 0.2);
+  }
+}
+
+/* ✨ BRILHO SUTIL no hover do botão mutado */
+.audio-button.muted:hover {
+  background: linear-gradient(135deg, #ff8a80 0%, #f77066 50%, #ee5a52 100%);
+  box-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 10px rgba(255, 107, 107, 0.5); /* ✨ Brilho vermelho suave */
+}
+
+.audio-icon {
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
+  transition: all 0.2s ease;
+}
+
+/* ✨ Ícone brilha levemente no hover */
+.audio-button:hover .audio-icon {
+  transform: scale(1.05); /* Reduzido de 1.1 para 1.05 */
+  filter: 
+    drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3))
+    drop-shadow(0 0 3px rgba(255, 255, 255, 0.4)); /* ✨ Brilho no ícone */
+}
+
+.audio-status {
+  font-size: 11px;
+  color: #333;
+  font-weight: 600;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+}
+
+.audio-status.muted {
+  color: #dc3545;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.9);
+  animation: textPulse 2s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* 🎵 Indicador visual de ondas sonoras */
+.audio-waves {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  margin-left: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.audio-control-panel:hover .audio-waves {
+  opacity: 1;
+}
+
+.audio-wave {
+  width: 2px;
+  background: linear-gradient(to top, #4CAF50 0%, #8BC34A 100%);
+  border-radius: 1px;
+  animation: waveAnimation 1.5s ease-in-out infinite;
+}
+
+.audio-wave:nth-child(1) {
+  height: 8px;
+  animation-delay: 0s;
+}
+
+.audio-wave:nth-child(2) {
+  height: 12px;
+  animation-delay: 0.1s;
+}
+
+.audio-wave:nth-child(3) {
+  height: 6px;
+  animation-delay: 0.2s;
+}
+
+.audio-wave:nth-child(4) {
+  height: 10px;
+  animation-delay: 0.3s;
+}
+
+@keyframes waveAnimation {
+  0%, 100% {
+    transform: scaleY(0.3);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.audio-waves.muted .audio-wave {
+  background: linear-gradient(to top, #dc3545 0%, #ff6b6b 100%);
+  animation: mutedWaveAnimation 0.8s ease-in-out infinite;
+}
+
+@keyframes mutedWaveAnimation {
+  0%, 100% {
+    transform: scaleY(0.1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scaleY(0.2);
+    opacity: 0.5;
+  }
+}
+
+/* 📱 Mobile responsivo */
+@media (max-width: 768px) {
+  .audio-control-container {
+    top: 70px;
+    left: 15px;
+  }
+  
+  .audio-control-panel {
+    padding: 5px 8px;
+    min-width: 120px;
+    border-radius: 6px;
+  }
+  
+  .audio-button {
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    border-radius: 4px;
+  }
+  
+  .audio-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .audio-status {
+    font-size: 10px;
+  }
+  
+  .audio-waves {
+    margin-left: 2px;
+  }
+  
+  .audio-wave {
+    width: 1.5px;
+  }
+  
+  .audio-wave:nth-child(1) { height: 6px; }
+  .audio-wave:nth-child(2) { height: 9px; }
+  .audio-wave:nth-child(3) { height: 4px; }
+  .audio-wave:nth-child(4) { height: 7px; }
+}
+
+/* 🌟 Efeito de brilho especial no painel */
+.audio-control-panel::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  height: 30%;
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.4) 0%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    transparent 100%);
+  border-radius: 6px 6px 0 0;
+  pointer-events: none;
+}
+
+.audio-control-panel {
+  position: relative;
+  overflow: hidden;
+}

@@ -1,0 +1,484 @@
+/* Matrix Background Animation */
+.matrix-bg-login {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.matrix-column-login {
+  position: absolute;
+  top: -100%;
+  color: #00ff7f;
+  font-size: 10px;
+  animation: matrix-rain-login 6s linear infinite;
+  white-space: nowrap;
+  text-shadow: 0 0 5px #00ff7f;
+}
+
+@keyframes matrix-rain-login {
+  0% { 
+    top: -100%; 
+    opacity: 1; 
+  }
+  100% { 
+    top: 100%; 
+    opacity: 0; 
+  }
+}
+
+/* Background com gradientes sutis */
+.login-bg {
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(0, 255, 127, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 255, 127, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(0, 255, 127, 0.02) 0%, transparent 70%),
+    #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11000;
+  animation: loginBgPulse 6s ease-in-out infinite;
+}
+
+@keyframes loginBgPulse {
+  0%, 100% { 
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%; 
+  }
+  50% { 
+    background-size: 120% 120%, 120% 120%, 130% 130%, 100% 100%; 
+  }
+}
+
+/* Login Box Futurista */
+.login-box {
+  background: 
+    linear-gradient(135deg, rgba(0,0,0,0.98) 0%, rgba(10,10,10,0.99) 50%, rgba(0,0,0,0.98) 100%);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  color: #fff;
+  padding: 40px 50px 35px 50px;
+  font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
+  border-radius: 15px;
+  width: 420px;
+  box-shadow: 
+    0 0 40px rgba(0, 255, 127, 0.2),
+    0 0 80px rgba(0, 255, 127, 0.08),
+    inset 0 0 30px rgba(0, 255, 127, 0.03),
+    inset 0 0 1px rgba(255, 255, 255, 0.1);
+  z-index: 12000;
+  text-align: left;
+  animation: loginBoxEntrance 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+/* Borda animada neon */
+.login-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(45deg, 
+    #00ff7f 0%, 
+    #00cc66 25%, 
+    #00ff7f 50%, 
+    #00cc66 75%, 
+    #00ff7f 100%);
+  background-size: 400% 400%;
+  border-radius: 15px;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask-composite: xor;
+  animation: borderFlow 4s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+/* Scan lines internas */
+.login-box::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    rgba(0, 255, 127, 0.02) 1px,
+    rgba(0, 255, 127, 0.02) 2px,
+    transparent 3px
+  );
+  border-radius: 13px;
+  pointer-events: none;
+  animation: scanLines 2s linear infinite;
+}
+
+@keyframes borderFlow {
+  0%, 100% { 
+    background-position: 0% 50%; 
+    opacity: 0.6;
+  }
+  50% { 
+    background-position: 100% 50%; 
+    opacity: 1;
+  }
+}
+
+@keyframes scanLines {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes loginBoxEntrance {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.85) translateY(40px) rotateX(15deg);
+    box-shadow: 0 0 0 rgba(0, 255, 127, 0);
+  }
+  60% {
+    opacity: 0.8;
+    transform: scale(1.02) translateY(-5px) rotateX(0deg);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) translateY(0) rotateX(0deg);
+  }
+}
+
+/* Labels melhorados */
+.login-label {
+  font-size: 1.1rem;
+  margin-top: 18px;
+  margin-bottom: 6px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  position: relative;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.login-label::before {
+  content: '> ';
+  color: #00ff7f;
+  text-shadow: 0 0 8px #00ff7f;
+  animation: labelBlink 2s ease-in-out infinite;
+}
+
+@keyframes labelBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.4; }
+}
+
+/* Campos de input futuristas */
+.login-field {
+  background: 
+    linear-gradient(135deg, #0a0a0a 0%, #151515 50%, #0a0a0a 100%);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  font-size: 1.15rem;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  min-height: 1.8em;
+  display: flex;
+  gap: 1px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+/* Borda animada dos campos */
+.login-field::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(90deg, 
+    #333 0%, 
+    #00ff7f 30%, 
+    #00cc66 50%,
+    #00ff7f 70%, 
+    #333 100%);
+  background-size: 200% 100%;
+  border-radius: 10px;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: all 0.4s ease;
+  animation: fieldBorderFlow 3s linear infinite;
+}
+
+.login-field:focus-within::before,
+.login-field:hover::before {
+  opacity: 1;
+}
+
+/* Scan line nos campos */
+.login-field::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00ff7f, transparent);
+  transform: translateX(-100%);
+  animation: fieldScanLine 3s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+@keyframes fieldBorderFlow {
+  0% { background-position: -200% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+@keyframes fieldScanLine {
+  0%, 70% { transform: translateX(-100%); opacity: 0; }
+  80%, 90% { opacity: 0.8; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+/* Caracteres hackeados */
+.hacker-login-char {
+  display: inline-block;
+  min-width: 1ch;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #fff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.hacker-login-char.green {
+  color: #00ff7f !important;
+  text-shadow: 
+    0 0 10px #00ff7f,
+    0 0 20px rgba(0, 255, 127, 0.4),
+    0 0 5px #00ff7f;
+  transform: scale(1.05);
+}
+
+.pulse-green {
+  animation: pulseGreenEpic 0.3s cubic-bezier(.8,-0.5,.2,1.5) 1;
+  color: #00ff7f !important;
+  text-shadow: 
+    0 0 20px #00ff7f,
+    0 0 40px rgba(0, 255, 127, 0.6),
+    0 0 10px #00ff7f,
+    0 0 2px #fff;
+}
+
+@keyframes pulseGreenEpic {
+  0% { 
+    color: #fff; 
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+  50% { 
+    color: #00ff7f; 
+    transform: scale(1.15);
+    text-shadow: 
+      0 0 25px #00ff7f,
+      0 0 50px rgba(0, 255, 127, 0.8),
+      0 0 15px #00ff7f;
+  }
+  100% { 
+    color: #00ff7f; 
+    transform: scale(1.05);
+    text-shadow: 
+      0 0 20px #00ff7f,
+      0 0 40px rgba(0, 255, 127, 0.6),
+      0 0 10px #00ff7f;
+  }
+}
+
+/* Status de login épico */
+.login-status {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 25px;
+  min-height: 2.2em;
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-size: 1.5em;
+  position: relative;
+  padding: 12px 0;
+  text-transform: uppercase;
+}
+
+.login-status.accessing {
+  color: #00ff7f;
+  text-shadow: 
+    0 0 20px #00ff7f,
+    0 0 40px rgba(0, 255, 127, 0.5),
+    0 0 60px rgba(0, 255, 127, 0.2),
+    0 0 10px #00ff7f;
+  animation: accessingEpicPulse 2.5s ease-in-out infinite;
+}
+
+.login-status.granted {
+  color: #00ff7f;
+  text-shadow:
+    0 0 30px #00ff7f,
+    0 0 60px rgba(0, 255, 127, 0.8),
+    0 0 90px rgba(0, 255, 127, 0.4),
+    0 0 15px #00ff7f,
+    0 0 5px #fff;
+  animation: grantedEpicExplosion 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+/* Efeito de explosão no granted */
+.login-status.granted::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle, rgba(0, 255, 127, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: grantedShockwave 0.8s ease-out;
+  pointer-events: none;
+}
+
+.login-status.granted::after {
+  content: '';
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(0, 255, 127, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: grantedShockwave 0.8s ease-out 0.2s;
+  pointer-events: none;
+}
+
+@keyframes accessingEpicPulse {
+  0%, 100% { 
+    transform: scale(1);
+    text-shadow: 
+      0 0 20px #00ff7f,
+      0 0 40px rgba(0, 255, 127, 0.5),
+      0 0 10px #00ff7f;
+  }
+  50% { 
+    transform: scale(1.08);
+    text-shadow: 
+      0 0 25px #00ff7f,
+      0 0 50px rgba(0, 255, 127, 0.8),
+      0 0 80px rgba(0, 255, 127, 0.3),
+      0 0 15px #00ff7f;
+  }
+}
+
+@keyframes grantedEpicExplosion {
+  0% { 
+    transform: scale(1);
+    text-shadow: 0 0 10px #00ff7f;
+  }
+  30% { 
+    transform: scale(1.25);
+    text-shadow: 
+      0 0 40px #00ff7f,
+      0 0 80px rgba(0, 255, 127, 1),
+      0 0 20px #fff;
+  }
+  100% { 
+    transform: scale(1.05);
+    text-shadow:
+      0 0 30px #00ff7f,
+      0 0 60px rgba(0, 255, 127, 0.8),
+      0 0 15px #00ff7f,
+      0 0 5px #fff;
+  }
+}
+
+@keyframes grantedShockwave {
+  0% { 
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Pontos animados */
+.accessing-dots {
+  display: inline-block;
+  min-width: 2em;
+  margin-left: 3px;
+  letter-spacing: 2px;
+  font-family: inherit;
+  animation: dotsGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes dotsGlow {
+  0%, 100% { 
+    text-shadow: 0 0 10px #00ff7f;
+    opacity: 0.7;
+  }
+  50% { 
+    text-shadow: 0 0 20px #00ff7f, 0 0 30px rgba(0, 255, 127, 0.5);
+    opacity: 1;
+  }
+}
+
+/* Responsivo Mobile */
+@media (max-width: 768px) {
+  .login-box {
+    width: 350px;
+    padding: 30px 35px 25px 35px;
+    margin: 20px;
+  }
+  
+  .login-status {
+    font-size: 1.3em;
+    letter-spacing: 2px;
+  }
+  
+  .login-label {
+    font-size: 1rem;
+    margin-top: 15px;
+  }
+  
+  .login-field {
+    font-size: 1rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-box {
+    width: 300px;
+    padding: 25px 30px 20px 30px;
+    margin: 15px;
+  }
+  
+  .login-status {
+    font-size: 1.2em;
+    letter-spacing: 1.5px;
+  }
+  
+  .login-label {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+  
+  .login-field {
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* Glitch effect para momentos especiais */
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+.login-box.glitch {
+  animation: glitch 0.3s ease-in-out;
+}

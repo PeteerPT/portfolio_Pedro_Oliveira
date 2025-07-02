@@ -1,0 +1,124 @@
+.windows-selector {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    color: #c0c0c0;
+    font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
+    font-size: 14px;
+    padding: 40px;
+    z-index: 10000;
+    overflow-y: auto;
+}
+
+.selector-container {
+    max-width: none;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: #c0c0c0;
+}
+
+.selector-header {
+    background: #c0c0c0;
+    color: #000;
+    padding: 8px 0;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.selector-text {
+    margin: 20px 0 30px 0;
+    line-height: 1.4;
+    color: #c0c0c0;
+}
+
+.os-options {
+    margin: 30px 0;
+}
+
+.os-option {
+    padding: 8px 4px; /* 🎯 PADDING MAIOR PARA MOBILE */
+    cursor: pointer;
+    transition: all 0.1s;
+    color: #c0c0c0;
+    user-select: none; /* 🎯 EVITA SELEÇÃO DE TEXTO */
+    -webkit-tap-highlight-color: transparent; /* 🎯 REMOVE HIGHLIGHT MOBILE */
+}
+
+.os-option.selected {
+    background: #c0c0c0;
+    color: #000;
+}
+
+.os-option:hover:not(.selected) {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1); /* 🎯 FEEDBACK VISUAL */
+}
+
+/* 🎯 FEEDBACK PARA MOBILE (TOUCH) */
+.os-option:active {
+    background: #808080;
+    color: #000;
+}
+
+.selector-tools {
+    margin: 40px 0 30px 0;
+    font-size: 14px;
+    color: #c0c0c0;
+}
+
+.countdown {
+    font-size: 12px;
+    margin: 30px 0;
+    color: #c0c0c0;
+}
+
+.countdown-number {
+    color: #fff;
+    font-weight: bold;
+}
+
+.enter-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    padding: 12px; /* 🎯 PADDING MAIOR PARA MOBILE */
+    background: #c0c0c0;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    text-align: center;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.enter-button:hover {
+    background: #fff;
+}
+
+.enter-button:active {
+    background: #808080;
+}
+
+/* 🎯 RESPONSIVO PARA MOBILE */
+@media (max-width: 768px) {
+    .windows-selector {
+        padding: 20px;
+        font-size: 12px;
+    }
+    
+    .os-option {
+        padding: 12px 8px; /* 🎯 AINDA MAIOR NO MOBILE */
+    }
+    
+    .enter-button {
+        font-size: 11px;
+        padding: 15px;
+    }
+}
