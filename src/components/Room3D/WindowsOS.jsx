@@ -14,28 +14,34 @@ export default function WindowsOS({ showPowerEffect = "on", registerPowerOff }) 
 
   const [powerEffect, setPowerEffect] = useState(null); // "on" | "off" | "waiting" | null
   const [showIframe, setShowIframe] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false); // controle inicial de montagem
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
     setHasMounted(true);
   }, []);
 
-  // LIGANDO
   useEffect(() => {
     if (showPowerEffect === "on") {
       setPowerEffect("waiting");
       setShowIframe(false);
 
-      const t = setTimeout(() => {
-        setPowerEffect("on");
-        setShowIframe(true);
-      }, 2000);
+      // ⏱️ Ajuste aqui o tempo da animação ON
+      const powerTimeout = setTimeout(() => {
+        setPowerEffect("on"); // Inicia a animação CRT
+      }, 2200); // <- Começa um pouco antes
 
-      return () => clearTimeout(t);
+      // ⏱️ Ajuste aqui o tempo para exibir o site
+      const iframeTimeout = setTimeout(() => {
+        setShowIframe(true); // Mostra o site
+      }, 2000); // <- Mostra depois do efeito começar
+
+      return () => {
+        clearTimeout(powerTimeout);
+        clearTimeout(iframeTimeout);
+      };
     }
   }, [showPowerEffect]);
 
-  // DESLIGANDO
   useEffect(() => {
     if (registerPowerOff) {
       registerPowerOff((onFinish) => {
@@ -58,7 +64,6 @@ export default function WindowsOS({ showPowerEffect = "on", registerPowerOff }) 
     }
   }
 
-  // POSIÇÃO DO MONITOR
   const glassLeft = "33.6%";
   const glassTop = "40.85%";
   const glassWidth = "14.85%";
@@ -101,7 +106,7 @@ export default function WindowsOS({ showPowerEffect = "on", registerPowerOff }) 
         }}
       />
 
-      {/* MONITOR EFFECT (abaixo do vidro) */}
+      {/* MONITOR EFFECT */}
       <div
         style={{
           position: "absolute",
@@ -109,7 +114,7 @@ export default function WindowsOS({ showPowerEffect = "on", registerPowerOff }) 
           top,
           width,
           height,
-          zIndex: 15, // agora por baixo do vidro
+          zIndex: 10, // zIndex menor para ficar abaixo do vidro
           pointerEvents: "none",
         }}
       >
@@ -184,7 +189,7 @@ export default function WindowsOS({ showPowerEffect = "on", registerPowerOff }) 
         />
       ))}
 
-      {/* VIDRO */}
+      {/* VIDRO – Fica acima do efeito */}
       <div
         style={{
           position: "absolute",
@@ -198,7 +203,7 @@ export default function WindowsOS({ showPowerEffect = "on", registerPowerOff }) 
           border: "1px solid rgba(255,255,255,0.09)",
           backdropFilter: "blur(19px) brightness(1.04)",
           WebkitBackdropFilter: "blur(19px) brightness(1.04)",
-          zIndex: 999, // vidro no topo
+          zIndex: 999, // acima do efeito
           pointerEvents: "none",
         }}
       />
