@@ -126,25 +126,25 @@ export default function WindowsOS({ showPowerEffect = "on", registerPowerOff }) 
       {/* IFRAME WEB */}
       {showIframe && (
         <iframe
-          src="https://portfolioweb-tau-silk.vercel.app/"
-          style={{
-            width: "82%",
-            height: "100%",
-            border: "none",
-            borderRadius: "2px",
-            transform: "scale(0.1752)",
-            transformOrigin: "center",
-            imageRendering: "crisp-edges",
-            pointerEvents: "auto",
-            cursor: "auto",
-            filter: "brightness(0.9) contrast(1.1)",
-          }}
-          title="Pedro's Portfolio"
-          loading="lazy"
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock"
-          allow="fullscreen; pointer-lock"
-          onPointerDown={playClickSound}
-        />
+  src="https://portfolioweb-tau-silk.vercel.app/"
+  style={{
+    width: "82%",
+    height: "100%",
+    border: "none",
+    borderRadius: "2px",
+    transform: "scale(0.1752)",
+    transformOrigin: "center",
+    imageRendering: "crisp-edges",
+    pointerEvents: "auto",
+    cursor: "auto",
+    filter: "brightness(0.9) contrast(1.1)",
+  }}
+  title="Pedro's Portfolio"
+  loading="lazy"
+  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-downloads"
+  allow="fullscreen; pointer-lock"
+  onPointerDown={playClickSound}
+/>
       )}
 
       {/* ÁUDIO DE CLIQUE */}
